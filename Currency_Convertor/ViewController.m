@@ -11,9 +11,12 @@
 #import "CCBaseModel.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *userCurrencyValue;
-@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *baseCountry;
+@property (weak, nonatomic) IBOutlet UITextField *userValue;
 @property (strong, nonatomic) CCBaseModel *baseModel;
+@property (weak, nonatomic) IBOutlet UICollectionView *keyboardCollectionView;
+
 @end
 
 @implementation ViewController
@@ -23,6 +26,9 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self currencyConveter];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -43,7 +49,6 @@
             [self getresponse:[NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror]];
             [[NSUserDefaults standardUserDefaults] setObject:[NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonerror] forKey:@"response"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]] forKey:@"lastUpdateTimestamp"];
-            [self updateUI];
         }
     }];
     [dataTask resume];
@@ -56,7 +61,7 @@
     self.baseModel.rates = response[@"rates"];
 }
 
-
+/*
 - (IBAction)clickResult:(id)sender {
     NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.userCurrencyValue.text];
@@ -70,6 +75,7 @@
         [self currencyConveter];
     }
 }
+*/
 
 - (void)currencyConveter {
     NSString *now = [NSString stringWithFormat:@"%@", [NSDate date]];
@@ -84,10 +90,13 @@
     } else {
         [self getresponse:[[NSUserDefaults standardUserDefaults] valueForKey:@"response"]];
     }
-    
-    [self updateUI];
 }
 
+- (IBAction)clickConvertCourency:(id)sender {
+    NSLog(@"Base Value");
+    
+}
+/*
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
         double singleCurrencyValue = [self.baseModel.rates[@"USD"] doubleValue];
@@ -97,5 +106,5 @@
         self.resultLabel.text = [NSString stringWithFormat:@"Base - %@ \n Date - %@ \n 1 INR in USD - %@ \n Total USD = %f ", self.baseModel.base, self.baseModel.date, self.baseModel.rates[@"USD"],totalValue ];
     });
 }
-
+*/
 @end
