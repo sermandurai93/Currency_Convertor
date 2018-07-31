@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *baseCountry;
 @property (weak, nonatomic) IBOutlet UITextField *userValue;
 @property (strong, nonatomic) CCBaseModel *baseModel;
-@property (weak, nonatomic) IBOutlet UICollectionView *keyboardCollectionView;
 
 @end
 
@@ -27,7 +26,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self currencyConveter];
+//    [self currencyConveter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,4 +106,89 @@
     });
 }
 */
+
+#pragma mark - Number Button Click Action
+
+- (IBAction)numberOne:(id)sender {
+    if (self.userValue.text != nil) {
+    self.userValue.text = [NSString stringWithFormat:@"%@1", self.userValue.text];
+    } else {
+        self.userValue.text = @"1";
+    }
+}
+- (IBAction)numberTwo:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@2", self.userValue.text];
+    } else {
+        self.userValue.text = @"2";
+    }
+}
+- (IBAction)numberThree:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@3", self.userValue.text];
+    } else {
+        self.userValue.text = @"3";
+    }
+}
+- (IBAction)numberFour:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@4", self.userValue.text];
+    } else {
+        self.userValue.text = @"4";
+    }
+}
+- (IBAction)numberFive:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@5", self.userValue.text];
+    } else {
+        self.userValue.text = @"5";
+    }
+}
+- (IBAction)numberSix:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@6", self.userValue.text];
+    } else {
+        self.userValue.text = @"6";
+    }
+}
+- (IBAction)numberSeven:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@7", self.userValue.text];
+    } else {
+        self.userValue.text = @"7";
+    }
+}
+- (IBAction)numberEight:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@8", self.userValue.text];
+    } else {
+        self.userValue.text = @"8";
+    }
+}
+- (IBAction)numberNine:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@8", self.userValue.text];
+    } else {
+        self.userValue.text = @"8";
+    }
+}
+- (IBAction)numberZero:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@0", self.userValue.text];
+    } else {
+        self.userValue.text = @"0";
+    }
+}
+- (IBAction)numberDot:(id)sender {
+    if (self.userValue.text != nil) {
+        self.userValue.text = [NSString stringWithFormat:@"%@.", self.userValue.text];
+    } else {
+        self.userValue.text = @".";
+    }
+}
+- (IBAction)numberDelete:(id)sender {
+    
+}
+
+
 @end
