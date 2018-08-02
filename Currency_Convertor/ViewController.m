@@ -26,7 +26,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-//    [self currencyConveter];
+  [self currencyConveter];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,11 +34,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)textFieldbegin:(id)sender {
+    [self resignFirstResponder];
+}
+
 - (void)networkCall {
-    NSURL *url = [NSURL URLWithString:@"https://exchangeratesapi.io/api/latest?base=INR"];
+    NSURL *url = [NSURL URLWithString:@"https://exchangeratesapi.io/api/latest?base=USD"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -60,22 +65,6 @@
     self.baseModel.rates = response[@"rates"];
 }
 
-/*
-- (IBAction)clickResult:(id)sender {
-    NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
-    NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.userCurrencyValue.text];
-    if (self.userCurrencyValue.text.length < 1) {
-        NSLog(@"Please Enter the Value");
-    } else if (![alphaNums isSupersetOfSet:inStringSet]) {
-        NSLog(@"Please Enter the Only Numbers");
-    } else if ([self.userCurrencyValue.text doubleValue] < 0) {
-        NSLog(@"Please Enter the value grater then zero");
-    }else  {
-        [self currencyConveter];
-    }
-}
-*/
-
 - (void)currencyConveter {
     NSString *now = [NSString stringWithFormat:@"%@", [NSDate date]];
     NSString *lastUpdateTimestamp = [[NSUserDefaults standardUserDefaults] valueForKey:@"lastUpdateTimestamp"];
@@ -84,111 +73,109 @@
         return;
     } else if ([[NSDate date] timeIntervalSince1970] - [lastUpdateTimestamp integerValue] >= 86400) {
         [self networkCall];
-    } else if (![now containsString:self.baseModel.date]) { //1day = 24h, 1440M, 86400S
-        [self networkCall];
     } else {
         [self getresponse:[[NSUserDefaults standardUserDefaults] valueForKey:@"response"]];
+        if (![now containsString:self.baseModel.date]) { //1day = 24h, 1440M, 86400S
+            [self networkCall];
+        }
     }
 }
 
 - (IBAction)clickConvertCourency:(id)sender {
-    NSLog(@"Base Value");
-    
+    if (self.userValue.text.length >0) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.userValue.text forKey:@"userValue"];
+    }
 }
-/*
-- (void)updateUI {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        double singleCurrencyValue = [self.baseModel.rates[@"USD"] doubleValue];
-        double userValue = [self->_userCurrencyValue.text doubleValue];
-        double totalValue = singleCurrencyValue * userValue;
-        self.resultLabel.numberOfLines = 0;
-        self.resultLabel.text = [NSString stringWithFormat:@"Base - %@ \n Date - %@ \n 1 INR in USD - %@ \n Total USD = %f ", self.baseModel.base, self.baseModel.date, self.baseModel.rates[@"USD"],totalValue ];
-    });
-}
-*/
 
 #pragma mark - Number Button Click Action
 
 - (IBAction)numberOne:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
     self.userValue.text = [NSString stringWithFormat:@"%@1", self.userValue.text];
     } else {
         self.userValue.text = @"1";
     }
 }
 - (IBAction)numberTwo:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@2", self.userValue.text];
     } else {
         self.userValue.text = @"2";
     }
 }
 - (IBAction)numberThree:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@3", self.userValue.text];
     } else {
         self.userValue.text = @"3";
     }
 }
 - (IBAction)numberFour:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@4", self.userValue.text];
     } else {
         self.userValue.text = @"4";
     }
 }
 - (IBAction)numberFive:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@5", self.userValue.text];
     } else {
         self.userValue.text = @"5";
     }
 }
 - (IBAction)numberSix:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@6", self.userValue.text];
     } else {
         self.userValue.text = @"6";
     }
 }
 - (IBAction)numberSeven:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@7", self.userValue.text];
     } else {
         self.userValue.text = @"7";
     }
 }
 - (IBAction)numberEight:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@8", self.userValue.text];
     } else {
         self.userValue.text = @"8";
     }
 }
 - (IBAction)numberNine:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@8", self.userValue.text];
     } else {
         self.userValue.text = @"8";
     }
 }
 - (IBAction)numberZero:(id)sender {
-    if (self.userValue.text != nil) {
+    if (self.userValue.text.length > 0) {
         self.userValue.text = [NSString stringWithFormat:@"%@0", self.userValue.text];
     } else {
         self.userValue.text = @"0";
     }
 }
 - (IBAction)numberDot:(id)sender {
-    if (self.userValue.text != nil) {
-        self.userValue.text = [NSString stringWithFormat:@"%@.", self.userValue.text];
+    if (self.userValue.text.length > 0) {
+        if (![self.userValue.text containsString:@"."]){
+            self.userValue.text = [NSString stringWithFormat:@"%@.", self.userValue.text];
+        }
     } else {
         self.userValue.text = @".";
     }
 }
 - (IBAction)numberDelete:(id)sender {
-    
+    if (self.userValue.text.length > 0) {
+        NSString *beforDeleteText = self.userValue.text;
+        NSString *afterDeleteText = [beforDeleteText substringToIndex: [beforDeleteText length] - 1];
+        self.userValue.text = afterDeleteText;
+    }
 }
+
 
 
 @end

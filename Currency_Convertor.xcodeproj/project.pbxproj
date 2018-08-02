@@ -17,6 +17,7 @@
 		41784A5820F7C89A0012F2CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41784A5720F7C8990012F2CC /* main.m */; };
 		41784A6220F7C89A0012F2CC /* Currency_ConvertorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41784A6120F7C89A0012F2CC /* Currency_ConvertorTests.m */; };
 		41784A6D20F7C89A0012F2CC /* Currency_ConvertorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41784A6C20F7C89A0012F2CC /* Currency_ConvertorUITests.m */; };
+		41F6C6E92113748600F92B4E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F6C6E82113748600F92B4E /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		41784A6820F7C89A0012F2CC /* Currency_ConvertorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Currency_ConvertorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41784A6C20F7C89A0012F2CC /* Currency_ConvertorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Currency_ConvertorUITests.m; sourceTree = "<group>"; };
 		41784A6E20F7C89A0012F2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41F6C6E72113748600F92B4E /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		41F6C6E82113748600F92B4E /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,8 @@
 				41784A5620F7C8990012F2CC /* Info.plist */,
 				41784A5720F7C8990012F2CC /* main.m */,
 				41784A4E20F7C8980012F2CC /* Currency_Convertor.xcdatamodeld */,
+				41F6C6E72113748600F92B4E /* DetailViewController.h */,
+				41F6C6E82113748600F92B4E /* DetailViewController.m */,
 			);
 			path = Currency_Convertor;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				41784A4A20F7C8980012F2CC /* ViewController.m in Sources */,
 				41784A5820F7C89A0012F2CC /* main.m in Sources */,
 				41784A4720F7C8980012F2CC /* AppDelegate.m in Sources */,
+				41F6C6E92113748600F92B4E /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
