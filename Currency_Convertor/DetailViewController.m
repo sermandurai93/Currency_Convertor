@@ -11,9 +11,12 @@
 
 @interface DetailViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, strong)NSArray *countryDetail;
 @property (nonatomic, strong)NSDictionary *cuntryCurrencyValue;
 @property CCBaseModel *baseModel;
+@property (nonatomic, readonly) NSArray *searchResults;
 @end
 
 @implementation DetailViewController
@@ -24,6 +27,9 @@
     [self responseFromModel:[[NSUserDefaults standardUserDefaults] valueForKey:@"response"]];
     
     // Do any additional setup after loading the view.
+}
+
+-(void)viewDidAppear:(BOOL)animated {
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,17 +55,34 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _countryDetail.count - 1;
+    if (self.searchResults.count || self.searchString.length) {
+        return _searchResults.count;
+    }
+    return _countryDetail.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"courencyDetailCell"];
+    if (self.searchResults.count) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%f", [self convervalue:[self.searchResults objectAtIndex:indexPath.row]]];
+        cell.textLabel.text = [self.searchResults objectAtIndex:indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:[self.searchResults objectAtIndex:indexPath.row]];
+    } else {
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%f", [self convervalue:[_countryDetail objectAtIndex:indexPath.row]]];
     cell.textLabel.text = [_countryDetail objectAtIndex:indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:[_countryDetail objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchString = searchText;
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
+    _searchResults = [self.countryDetail filteredArrayUsingPredicate:resultPredicate];
+    [self.tableView reloadData];
 }
 
 - (double)convervalue:(NSString *)curntryValue {

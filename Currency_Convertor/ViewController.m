@@ -40,7 +40,7 @@
 }
 
 - (void)networkCall {
-    NSURL *url = [NSURL URLWithString:@"https://exchangeratesapi.io/api/latest?base=USD"];
+    NSURL *url = [NSURL URLWithString:@"https://api.exchangeratesapi.io/latest?base=USD"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
